@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online word puzzle game with multiple difficulty levels. Challenge your vocabulary skills with our interactive puzzle tool.">
+    <meta name="keywords" content="word puzzle, vocabulary game, word game, puzzle tool, online puzzle">
+    <meta name="author" content="Word Puzzle Tools">
+    <title>Word Puzzle Challenge | Interactive Vocabulary Game</title>
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourwebsite.com/">
+    <meta property="og:title" content="Word Puzzle Challenge | Interactive Vocabulary Game">
+    <meta property="og:description" content="Free online word puzzle game with multiple difficulty levels. Challenge your vocabulary skills with our interactive puzzle tool.">
+    <meta property="og:image" content="https://yourwebsite.com/images/word-puzzle-preview.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://yourwebsite.com/">
+    <meta property="twitter:title" content="Word Puzzle Challenge | Interactive Vocabulary Game">
+    <meta property="twitter:description" content="Free online word puzzle game with multiple difficulty levels. Challenge your vocabulary skills with our interactive puzzle tool.">
+    <meta property="twitter:image" content="https://yourwebsite.com/images/word-puzzle-preview.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://yourwebsite.com/word-puzzle" />
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Game",
+      "name": "Word Puzzle Challenge",
+      "description": "Interactive vocabulary puzzle game with multiple difficulty levels",
+      "url": "https://yourwebsite.com/word-puzzle",
+      "genre": "Educational/Puzzle",
+      "audience": {
+        "@type": "PeopleAudience",
+        "suggestedMinAge": "8"
+      }
+    }
+    </script>
+    
+    <style>
+        :root {
+            --primary-color: #4a6fa5;
+            --secondary-color: #166088;
+            --accent-color: #4fc3f7;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+        
+        .ad-banner {
+            background-color: #f0f0f0;
+            padding: 15px;
+            margin: 20px 0;
+            text-align: center;
+            border-radius: var(--border-radius);
+            border: 1px dashed #ccc;
+        }
+        
+        main {
+            padding: 2rem 0;
+            min-height: calc(100vh - 200px);
+        }
+        
+        .puzzle-container {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        h1 {
+            font-family: 'Poppins', sans-serif;
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .difficulty-selector {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .difficulty-btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: var(--border-radius);
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .difficulty-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .difficulty-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .puzzle-area {
+            margin: 2rem 0;
+        }
+        
+        .word-display {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            min-height: 3rem;
+            letter-spacing: 0.5rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+        
+        .scrambled-letters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 2rem;
+        }
+        
+        .letter-tile {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--accent-color);
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: all 0.3s;
+            user-select: none;
+        }
+        
+        .letter-tile:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .letter-tile.selected {
+            background-color: var(--warning-color);
+            transform: scale(1.1);
+        }
+        
+        .letter-tile.used {
+            opacity: 0.5;
+            transform: scale(0.9);
+            pointer-events: none;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-secondary {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #e2e6ea;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .message {
+            text-align: center;
+            margin: 1rem 0;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+        }
+        
+        .success {
+            background-color: rgba(40, 167, 69, 0.2);
+            color: var(--success-color);
+        }
+        
+        .error {
+            background-color: rgba(220, 53, 69, 0.2);
+            color: var(--danger-color);
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .stat-box {
+            background-color: var(--light-color);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            min-width: 120px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        .copyright {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0 0.75rem;
+            }
+            
+            .word-display {
+                font-size: 1.5rem;
+                letter-spacing: 0.3rem;
+            }
+            
+            .letter-tile {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 250px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .difficulty-selector {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .difficulty-btn {
+                width: 100%;
+                max-width: 200px;
+            }
+            
+            .letter-tile {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+            
+            .stats {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .stat-box {
+                width: 100%;
+                max-width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXX"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    
+    <header>
+        <div class="container header-content">
+            <div class="logo">Word Puzzle</div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">How to Play</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main class="container">
+        <!-- Top Ad Banner -->
+        <div class="ad-banner">
+            <!-- Replace with your Google AdSense code -->
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_PUBLISHER_ID"
+                crossorigin="anonymous"></script>
+            <!-- Top Banner Ad -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
+                data-ad-slot="YOUR_AD_SLOT_ID"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        <div class="puzzle-container">
+            <h1>Word Puzzle Challenge</h1>
+            
+            <div class="difficulty-selector">
+                <button class="difficulty-btn active" data-level="easy">Easy</button>
+                <button class="difficulty-btn" data-level="medium">Medium</button>
+                <button class="difficulty-btn" data-level="hard">Hard</button>
+                <button class="difficulty-btn" data-level="expert">Expert</button>
+            </div>
+            
+            <div class="puzzle-area">
+                <div class="word-display" id="word-display"></div>
+                
+                <div class="scrambled-letters" id="scrambled-letters"></div>
+                
+                <div class="controls">
+                    <button class="btn btn-primary" id="check-btn">Check Word</button>
+                    <button class="btn btn-secondary" id="shuffle-btn">Shuffle Letters</button>
+                    <button class="btn btn-secondary" id="new-game-btn">New Game</button>
+                </div>
+                
+                <div class="message" id="message" style="display: none;"></div>
+                
+                <div class="stats">
+                    <div class="stat-box">
+                        <div class="stat-value" id="score">0</div>
+                        <div class="stat-label">Score</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value" id="level">Easy</div>
+                        <div class="stat-label">Level</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value" id="streak">0</div>
+                        <div class="stat-label">Streak</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Middle Ad Banner -->
+        <div class="ad-banner">
+            <!-- Replace with your Google AdSense code -->
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_PUBLISHER_ID"
+                crossorigin="anonymous"></script>
+            <!-- Middle Rectangle Ad -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
+                data-ad-slot="YOUR_AD_SLOT_ID"
+                data-ad-format="rectangle"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        <div class="puzzle-container">
+            <h2>How to Play</h2>
+            <p>1. Select your difficulty level (Easy, Medium, Hard, or Expert)</p>
+            <p>2. Click on the letters in the correct order to form the hidden word</p>
+            <p>3. Click "Check Word" to verify your answer</p>
+            <p>4. Use "Shuffle" to rearrange the letters if needed</p>
+            <p>5. Earn points for each correct word - higher levels give more points!</p>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact Us</a>
+                <a href="#">FAQ</a>
+            </div>
+            <div class="copyright">
+                &copy; <span id="year"></span> Word Puzzle Tools. All rights reserved.
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Word banks for different difficulty levels
+        const wordBanks = {
+            easy: [
+                "APPLE", "TABLE", "CHAIR", "HOUSE", "WATER",
+                "MUSIC", "PHONE", "LIGHT", "GRASS", "CLOUD",
+                "BREAD", "FRUIT", "SUNNY", "BEACH", "SMALL"
+            ],
+            medium: [
+                "BANANA", "GARDEN", "PENCIL", "ROCKET", "WINDOW",
+                "BUTTER", "PILLOW", "TIGGER", "SUNSET", "DOCTOR",
+                "COFFEE", "BOTTLE", "PURPLE", "SILVER", "BASKET"
+            ],
+            hard: [
+                "ELEPHANT", "MOUNTAIN", "HOSPITAL", "BIRTHDAY", "NOTEBOOK",
+                "RAINBOW", "KANGAROO", "VACATION", "TELEPHONE", "UNIVERSE",
+                "CHOCOLATE", "BUTTERFLY", "ADVENTURE", "FIREPLACE", "WATERMELON"
+            ],
+            expert: [
+                "EXTRAVAGANZA", "KALEIDOSCOPE", "PNEUMONIA", "QUIZZICAL", "XENOPHOBIA",
+                "JUXTAPOSITION", "ZUGZWANG", "QUIXOTIC", "ZYGOMORPHIC", "XYLOGRAPH",
+                "QUADRILLE", "JEJUNE", "ZYGOTENE", "QUINTESSENTIAL", "YACHTING"
+            ]
+        };
+        
+        // Game state variables
+        let currentLevel = "easy";
+        let currentWord = "";
+        let scrambledLetters = [];
+        let selectedLetters = [];
+        let score = 0;
+        let streak = 0;
+        
+        // DOM elements
+        const wordDisplay = document.getElementById("word-display");
+        const scrambledLettersContainer = document.getElementById("scrambled-letters");
+        const checkBtn = document.getElementById("check-btn");
+        const shuffleBtn = document.getElementById("shuffle-btn");
+        const newGameBtn = document.getElementById("new-game-btn");
+        const messageElement = document.getElementById("message");
+        const scoreElement = document.getElementById("score");
+        const levelElement = document.getElementById("level");
+        const streakElement = document.getElementById("streak");
+        const difficultyBtns = document.querySelectorAll(".difficulty-btn");
+        
+        // Initialize the game
+        function initGame() {
+            // Set current year in footer
+            document.getElementById("year").textContent = new Date().getFullYear();
+            
+            // Set up event listeners
+            difficultyBtns.forEach(btn => {
+                btn.addEventListener("click", changeDifficulty);
+            });
+            
+            checkBtn.addEventListener("click", checkWord);
+            shuffleBtn.addEventListener("click", shuffleLetters);
+            newGameBtn.addEventListener("click", startNewGame);
+            
+            // Start the first game
+            startNewGame();
+        }
+        
+        // Change difficulty level
+        function changeDifficulty(e) {
+            currentLevel = e.target.dataset.level;
+            
+            // Update active button
+            difficultyBtns.forEach(btn => {
+                btn.classList.remove("active");
+                if (btn.dataset.level === currentLevel) {
+                    btn.classList.add("active");
+                }
+            });
+            
+            // Update level display
+            levelElement.textContent = currentLevel.charAt(0).toUpperCase() + currentLevel.slice(1);
+            
+            // Start new game with selected difficulty
+            startNewGame();
+        }
+        
+        // Start a new game
+        function startNewGame() {
+            // Select a random word from the current level's word bank
+            const words = wordBanks[currentLevel];
+            currentWord = words[Math.floor(Math.random() * words.length)];
+            
+            // Scramble the letters
+            scrambledLetters = scrambleWord(currentWord);
+            
+            // Reset selected letters
+            selectedLetters = [];
+            
+            // Update the display
+            updateDisplay();
+            
+            // Hide any previous messages
+            messageElement.style.display = "none";
+        }
+        
+        // Scramble a word
+        function scrambleWord(word) {
+            const letters = word.split("");
+            
+            // Fisher-Yates shuffle algorithm
+            for (let i = letters.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [letters[i], letters[j]] = [letters[j], letters[i]];
+            }
+            
+            return letters;
+        }
+        
+        // Update the game display
+        function updateDisplay() {
+            // Clear the scrambled letters container
+            scrambledLettersContainer.innerHTML = "";
+            
+            // Create letter tiles for scrambled letters
+            scrambledLetters.forEach((letter, index) => {
+                const letterTile = document.createElement("div");
+                letterTile.className = "letter-tile";
+                letterTile.textContent = letter;
+                letterTile.dataset.index = index;
+                
+                // Add selected class if this letter is selected
+                if (selectedLetters.includes(index)) {
+                    letterTile.classList.add("selected");
+                }
+                
+                // Add used class if this letter is used in the current attempt
+                if (selectedLetters.includes(index)) {
+                    letterTile.classList.add("used");
+                }
+                
+                // Add click event
+                letterTile.addEventListener("click", () => selectLetter(index));
+                
+                scrambledLettersContainer.appendChild(letterTile);
+            });
+            
+            // Update the word display with selected letters
+            let displayWord = "";
+            selectedLetters.forEach(index => {
+                displayWord += scrambledLetters[index];
+            });
+            
+            wordDisplay.textContent = displayWord.split("").join(" ");
+        }
+        
+        // Select a letter
+        function selectLetter(index) {
+            // If letter is already selected, remove it
+            if (selectedLetters.includes(index)) {
+                selectedLetters = selectedLetters.filter(i => i !== index);
+            } 
+            // Otherwise add it to the selected letters
+            else {
+                selectedLetters.push(index);
+            }
+            
+            updateDisplay();
+        }
+        
+        // Check if the selected letters form the correct word
+        function checkWord() {
+            // Build the attempted word from selected letters
+            let attemptedWord = "";
+            selectedLetters.forEach(index => {
+                attemptedWord += scrambledLetters[index];
+            });
+            
+            // Check if the attempt is correct
+            if (attemptedWord === currentWord) {
+                // Calculate points based on word length and streak
+                const wordLength = currentWord.length;
+                const points = wordLength * 10 + (streak * 5);
+                score += points;
+                
+                // Update streak
+                streak++;
+                
+                // Show success message
+                showMessage(`Correct! +${points} points`, "success");
+                
+                // Update score and streak displays
+                scoreElement.textContent = score;
+                streakElement.textContent = streak;
+                
+                // Start a new game after a short delay
+                setTimeout(startNewGame, 1500);
+            } else {
+                // Reset streak
+                streak = 0;
+                streakElement.textContent = streak;
+                
+                // Show error message
+                showMessage("Try again!", "error");
+            }
+        }
+        
+        // Shuffle the letters
+        function shuffleLetters() {
+            // Only shuffle letters that aren't currently selected
+            const unselectedIndices = [];
+            const unselectedLetters = [];
+            
+            scrambledLetters.forEach((letter, index) => {
+                if (!selectedLetters.includes(index)) {
+                    unselectedIndices.push(index);
+                    unselectedLetters.push(letter);
+                }
+            });
+            
+            // Shuffle the unselected letters
+            for (let i = unselectedLetters.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [unselectedLetters[i], unselectedLetters[j]] = [unselectedLetters[j], unselectedLetters[i]];
+            }
+            
+            // Put the shuffled letters back
+            unselectedIndices.forEach((originalIndex, shuffledIndex) => {
+                scrambledLetters[originalIndex] = unselectedLetters[shuffledIndex];
+            });
+            
+            updateDisplay();
+        }
+        
+        // Show a message
+        function showMessage(text, type) {
+            messageElement.textContent = text;
+            messageElement.className = "message " + type;
+            messageElement.style.display = "block";
+            
+            // Hide the message after 3 seconds
+            setTimeout(() => {
+                messageElement.style.display = "none";
+            }, 3000);
+        }
+        
+        // Initialize the game when the page loads
+        window.addEventListener("DOMContentLoaded", initGame);
+    </script>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXX-X"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-XXXXXX-X');
+    </script>
+</body>
+</html>
